@@ -1,0 +1,40 @@
+# Sample data
+age <- c(22, 25, 27, 30, 32, 35, 38, 40, 42, 45, 48, 50, 52, 55, 58, 60, 63, 65)
+body_fat <- c(18, 20, 19, 21, 22, 23, 24, 26, 25, 27, 28, 29, 30, 32, 34, 33, 35, 36)
+
+# Descriptive statistics for Age
+mean_age <- mean(age)
+median_age <- median(age)
+sd_age <- sd(age)
+
+# Descriptive statistics for Body Fat Percentage
+mean_fat <- mean(body_fat)
+median_fat <- median(body_fat)
+sd_fat <- sd(body_fat)
+
+# Correlation between Age and Body Fat Percentage
+correlation <- cor(age, body_fat)
+
+# Output the results
+cat("Descriptive Statistics for Age:\n")
+cat("̥
+    
+    
+    
+    Mean Age: ", mean_age, "\n")
+cat("Median Age: ", median_age, "\n")
+cat("Standard Deviation of Age: ", sd_age, "\n\n")
+
+cat("Descriptive Statistics for Body Fat Percentage:\n")
+cat("Mean Body Fat: ", mean_fat, "\n")
+cat("Median Body Fat: ", median_fat, "\n")
+cat("Standard Deviation of Body Fat: ", sd_fat, "\n\n")
+
+cat("Correlation between Age and Body Fat Percentage: ", correlation, "\n\n")
+
+# Visualization - Scatter Plot
+plot(age, body_fat, main="Scatter Plot of Age vs Body Fat",
+     xlab="Age (years)", ylab="Body Fat (%)", pch=19, col="blue")
+
+# Optionally, add a trend line (linear regression line)
+abline(lm(body_fat ~ age), col="red")
