@@ -1,0 +1,45 @@
+# Load required libraries
+library(ggplot2)
+library(caret)
+library(randomForest)
+library(reshape2)
+
+# Generate synthetic dataset
+set.seed(42)
+n <- 1000  # Number of transactions
+data <- data.frame(
+  transaction_amount = runif(n, min = 1, max = 10000),
+  transaction_time = sample(0:23, n, replace = TRUE),
+  account_age = runif(n, min = 0.1, max = 10),
+  num_failed_logins = sample(0:5, n, replace = TRUE),
+  fraud = sample(0:1, n, replace = TRUE, prob = c(0.95, 0.05)) # 5% fraud cases
+)
+
+# Convert fraud column to factor
+data$fraud <- as.factor(data$fraud)
+
+# Split dataset into training and testing sets
+set.seed(123)
+trainIndex <- createDataPartition(data$fraud, p = 0.7, list = FALSE)
+trainData <- data[trainIndex, ]
+testData  <- data[-trainIndex, ]
+
+# Train a Random Forest model
+model <- randomForest(fraud ~ ., data = trainData, ntree = 100, importance = TRUE)
+
+# Predict on test data
+predictions <- predict(model, testData )
+# Confusion matrix
+conf_matrix <- table(Predicted = predictions, Actual = testData$fraud)
+
+# Convert to dataframe for ggplot
+cm_melted <- melt(conf_matrix)
+
+# Plot confusion matrix heatmap
+ggplot(cm_melted, aes(x = Predicted, y = Actual, fill = value)) +
+  geom_tile() +
+  geom_text(aes(label = value), color = "white", size = 6) +
+  scale_fill_gradient(low = "white", high = "blue") +
+  labs(title = "Confusion Matrix", x = "Predicted Label", y = "Actual Label") +
+  theme_minimal()
+
