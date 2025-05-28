@@ -1,0 +1,5 @@
+samplearray<-c(1:20)
+samplearray
+
+formmatrix<-array(samplearray,dim=c(4,5,2))
+formmatrix
