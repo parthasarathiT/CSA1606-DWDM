@@ -1,0 +1,10 @@
+repeat_each <- rep(c(1,2,3), each = 3)
+repeat_each
+#
+repeat_times <- rep(c(1,2,3), times = 3)
+
+repeat_times
+#
+repeat_indepent <- rep(c(1,2,3), times = c(5,2,1))
+
+repeat_indepent
