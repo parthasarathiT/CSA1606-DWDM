@@ -1,0 +1,9 @@
+# Create Boxplots for Age and %Fat
+par(mfrow=c(1,2))  # To display two plots side by side
+
+# Boxplot for Age
+boxplot(age, main="Boxplot of Age", ylab="Age")
+̥
+# Boxplot for %Fat
+boxplot(fat_percent, main="Boxplot of %Fat", ylab="%Fat")
+
